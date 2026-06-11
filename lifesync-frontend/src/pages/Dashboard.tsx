@@ -5,6 +5,9 @@ import Sidebar from "../components/Sidebar";
 import { getDashboardSummary } from "../services/DashboardApi";
 import type { DashboardSummary } from "../types/DashboardSummary";
 import { Bell, CheckSquare, CreditCard, Package, Clock } from "lucide-react";
+import UpcomingTasksWidget from "../components/widgets/UpcomingTasksWidget";
+import WeatherWidget from "../components/widgets/WeatherWidget";
+import TodayScheduleWidget from "../components/widgets/TodayScheduleWidget";
 
 export default function Dashboard() {
     const [dashboard, setDashboard] = useState<DashboardSummary | null>(null);
@@ -43,6 +46,12 @@ export default function Dashboard() {
                     <DashboardCard title="Reminders" value={dashboard.upcomingReminders} icon={<Clock size={22} />} />
                 </section>
             </main>
+
+            <section className="mt-6 grid grid-cols-1 gap-4 lg:grid-cols-3">
+                <TodayScheduleWidget />
+                <UpcomingTasksWidget />
+                <WeatherWidget />
+            </section>
         </div>
     );
 }
