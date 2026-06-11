@@ -9,3 +9,25 @@ export async function getPendingTodos(): Promise<TodoTask[]> {
 
     return response.json();
 }
+
+export async function createTodo(
+    title: string,
+    description: string){
+    const response = await fetch(
+        "http://localhost:8080/api/todos",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                title,
+                description,
+            }),
+        }
+    );
+
+    if (!response.ok) {
+        throw new Error("Failed to create todo");
+    }
+}
