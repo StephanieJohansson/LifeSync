@@ -2,7 +2,7 @@
 export default function Sidebar() {
     return (
         <aside className="hidden min-h-screen w-64 bg-slate-950 p-6 text-white md:block">
-            <h2 className="mb-8 text-2xl font-bold">LifeSync</h2>
+            <h2 className="mb-8 text-2xl font-bold">Lunify</h2>
 
             <nav className="space-y-3 text-sm text-slate-300">
                 <p className="rounded-lg bg-slate-800 px-3 py-2 text-white">Home</p>
