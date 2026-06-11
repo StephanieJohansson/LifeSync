@@ -8,9 +8,12 @@ import {
     Package,
     Clock,
 } from "lucide-react";
+import CreateTodoModal from "./CreateTodoModal";
+import { createTodo } from "../services/TodoApi";
 
 export default function Header() {
     const [isQuickAddOpen, setIsQuickAddOpen] = useState(false);
+    const [showCreateTodo, setShowCreateTodo] = useState(false);
 
     const quickAddItems = [
         { name: "New Event", icon: Calendar },
@@ -57,6 +60,12 @@ export default function Header() {
                                 return (
                                     <button
                                         key={item.name}
+                                        onClick={() => {
+                                            if (item.name === "New Todo") {
+                                                setShowCreateTodo(true);
+                                                setIsQuickAddOpen(false);
+                                            }
+                                        }}
                                         className="flex w-full items-center gap-3 rounded-xl px-4 py-3 text-sm text-slate-300 transition hover:bg-slate-700 hover:text-white"
                                     >
                                         <Icon size={17} />
@@ -76,6 +85,19 @@ export default function Header() {
                     <span className="text-sm font-medium text-white">Stephanie</span>
                 </div>
             </div>
+
+            {showCreateTodo && (
+                <CreateTodoModal
+                    onClose={() => setShowCreateTodo(false)}
+                    onSave={(title, description) => {
+                        createTodo(title, description)
+                            .then(() => {
+                                setShowCreateTodo(false);
+                            })
+                            .catch(console.error);
+                    }}
+                />
+            )}
         </header>
     );
 }
